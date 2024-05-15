@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<body>
+    {% block content %}
+    <title>音樂會場地</title>
+<p><strong>場地名稱:</strong> {{ venue.name }}</p>
+<p><strong>場地地址:</strong> {{ venue.address }}</p>
+<p><strong>可容納人數:</strong> {{ venue.capacity }}</p>
+<img src="{% static 'images/venue.jpg' %}" width="400" height="400"></img>
+
+{% endblock %}
+</body>
+
+</html>

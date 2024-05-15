@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+<title>音樂會列表123</title>
+
+{% block content %}
+{% if concert_list %}
+{% load static %}
+<div style="display: flex;">
+    <table border="1" >
+        <thead>
+            <tr>
+                <th>音樂會名稱</th>
+                <th>剩餘門票</th>
+                <th>價格</th>
+                <th>開始日期</th>
+                <th>詳細資料</th>
+                <th>購票連結</th>
+                <th>音樂會場地</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in concert_list %}
+                <tr>
+                    <td>{{ obj.name }}</a></td>
+                    <td align="right"><a>{{ obj.tickets_left }}</a></td>
+                    <td><a>{{ obj.price }}</a></td>
+                    <td><a>{{ obj.starts_at }}</a></td>
+                    <td align="center">
+                        <a href="{% url 'tickets:concert-detail' obj.id %}">查看</a>
+                    </td>
+                    <td align="center">
+                        <a href="{% url 'tickets:ticket-buy'%}">購買</a>
+                    </td>
+                    <td><a href="{% url 'tickets:venue-detail' obj.venue.id %}">{{obj.venue.name}}</a></td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    <div style="text-align: center;border: 2px solid black; padding: 10px;">
+        <p>下一場演唱會</p>
+        <p></p>
+        <tr>
+            <td colspan="5"><p>{{ concert_list.0.name }}</p></td>
+            <td colspan="5"><p>開始時間：{{ concert_list.0.starts_at }}</p></td>
+        </tr>
+        <img src="{% static 'images/concert.png' %}" width="200" height="200"></img>
+    </div>
+</div>
+<div style="border: 2px solid black; padding: 10px; margin-top: 20px;">
+    {% if time_axis %}
+        <img src="data:image/png;base64,{{ time_axis }}" alt="時間軸">
+    {% endif %}
+</div>
+<div style="border: 2px solid black; padding: 10px; margin-top: 20px;">
+    {% if price %}
+        <img src="data:image/png;base64,{{ price }}" alt="直條圖">
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

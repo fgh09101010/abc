@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<script>
+    function displayCurrentTime() {
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        var day = now.getDate();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+
+        month = (month < 10) ? '0' + month : month;
+        day = (day < 10) ? '0' + day : day;
+        hours = (hours < 10) ? '0' + hours : hours;
+        minutes = (minutes < 10) ? '0' + minutes : minutes;
+        seconds = (seconds < 10) ? '0' + seconds : seconds;
+
+        var currentTime = year + '年' + month + '月' + day + '日 ' + hours + ':' + minutes + ':' + seconds;
+        document.getElementById('current-time').textContent = currentTime;
+    }
+
+    setInterval(displayCurrentTime, 1000);
+</script>
+
+<title>購票</title>
+<div style="text-align: center;border: 2px solid black; padding: 10px; width: 30%;">
+<h2> 音樂會購票</h2>
+<form method='POST'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>現在時間：<span id="current-time"></span></p>
+<input type="submit" value="save" />
+</form>
+</div>
+{% endblock %}

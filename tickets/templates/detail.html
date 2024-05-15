@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<body>
+    {% block content %}
+    <title>音樂會詳細資料</title>
+<p><strong>音樂會名稱:</strong> {{ concert.name }}</p>
+<p><strong>開始日期:</strong> {{ concert.starts_at }}</p>
+<p><strong>門票價格:</strong> {{ concert.price }}</p>
+<p><strong>剩餘門票:</strong> {{ concert.tickets_left }}</p>
+<img src="{% static 'images/concert.png' %}" width="400" height="400"></img>
+{% endblock %}
+</body>
+
+</html>
